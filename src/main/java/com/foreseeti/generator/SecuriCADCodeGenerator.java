@@ -891,16 +891,16 @@ public class SecuriCADCodeGenerator {
                writer.println("      }");
                break;
             case "TruncatedNormalDistribution":
-               writer.println(String.format("      return FMath.getTruncatedNormalDist(%f, %f).sample();", attackStep.ttcParameters.get(0), attackStep.ttcParameters.get(1)));
+               writer.println(String.format("      return FMath.getTruncatedNormalDist(%f, %f).sample();", attackStep.ttcParameters.get(0), Math.sqrt(attackStep.ttcParameters.get(1))));
                break;
             case "ExponentialDistribution":
-               writer.println(String.format("      return FMath.getExponentialDist(%f).sample();", attackStep.ttcParameters.get(0)));
+               writer.println(String.format("      return FMath.getExponentialDist(%f).sample();", 1.0 / attackStep.ttcParameters.get(0)));
                break;
             case "GammaDistribution":
-               writer.println(String.format("      return FMath.getGammaDist(%f, %f).sample();", attackStep.ttcParameters.get(0), attackStep.ttcParameters.get(1)));
+               writer.println(String.format("      return FMath.getGammaDist(%f, %f).sample();", attackStep.ttcParameters.get(0), 1.0 / attackStep.ttcParameters.get(1)));
                break;
             case "LogNormalDistribution":
-               writer.println(String.format("      return FMath.getLogNormalDist(%f, %f).sample();", attackStep.ttcParameters.get(0), attackStep.ttcParameters.get(1)));
+               writer.println(String.format("      return FMath.getLogNormalDist(%f, %f).sample();", Math.sqrt(attackStep.ttcParameters.get(1)), Math.log(attackStep.ttcParameters.get(0))));
                break;
             case "ParetoDistribution":
                writer.println(String.format("      return FMath.getParetoDist(%f, %f).sample();", attackStep.ttcParameters.get(0), attackStep.ttcParameters.get(1)));
